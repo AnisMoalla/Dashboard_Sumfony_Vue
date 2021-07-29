@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Tache Index</h4>
+				<p class="card-description">
+					Consulter
+					<code>Taches</code>
+				</p>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Nom</th>
+							<th>Etat</th>
+							<th>Departement</th>
+							<th>Document</th>
+							<th>Description</th>
+							<th>actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for tache in taches %}
+							<tr>
+								<td>{{ tache.nom }}</td>
+								<td>{{ tache.etat }}</td>
+								<td>{{ tache.departement }}</td>
+								<td>{{ tache.document }}</td>
+								<td>{{ tache.description }}</td>
+								<td>
+									<a href="{{ path('tache_show', {'id': tache.id}) }}">show</a>
+									<a href="{{ path('tache_edit', {'id': tache.id}) }}">edit</a>
+								</td>
+							</tr>
+						{% else %}
+							<tr>
+								<td colspan="7">no records found</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<a href="{{ path('tache_new') }}">Create new</a>
+{% endblock %}

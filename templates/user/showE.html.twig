@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+	<h1>Employe</h1>
+
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ user.id }}</td>
+			</tr>
+			<tr>
+				<th>Email</th>
+				<td>{{ user.email }}</td>
+			</tr>
+			<tr>
+				<th>Roles</th>
+				<td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+			</tr>
+			<tr>
+				<th>Password</th>
+				<td>{{ user.password }}</td>
+			</tr>
+			<tr>
+				<th>Nom</th>
+				<td>{{ user.nom }}</td>
+			</tr>
+			<tr>
+				<th>Prenom</th>
+				<td>{{ user.prenom }}</td>
+			</tr>
+			<tr>
+				<th>Cin</th>
+				<td>{{ user.cin }}</td>
+			</tr>
+			<tr>
+				<th>Tel</th>
+				<td>{{ user.tel }}</td>
+			</tr>
+			<tr>
+				<th>Departement</th>
+				<td>{{ user.departement }}</td>
+			</tr>
+			<tr>
+				<th>Adresse</th>
+				<td>{{ user.adresse }}</td>
+			</tr>
+			<tr>
+				<th>Age</th>
+				<td>{{ user.age }}</td>
+			</tr>
+			<tr>
+				<th>But</th>
+				<td>{{ user.but }}</td>
+			</tr>
+			<tr>
+				<th>Salaire</th>
+				<td>{{ user.salaire }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<a href="{{ path('employe_index') }}">back to list</a>
+
+	<a href="{{ path('employe_edit', {'id': user.id}) }}">edit</a>
+
+	{{ include('user/_delete_form_E.html.twig') }}
+{% endblock %}

@@ -1,0 +1,49 @@
+{% block title %}
+	Admins
+{% endblock %}
+
+{% block content %}
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Admin Index</h4>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Email</th>
+							<th>Roles</th>
+							<th>Nom</th>
+							<th>Prenom</th>
+							<th>Departement</th>
+							<th>Age</th>
+							<th>Poste</th>
+							<th>actions</th>
+						</tr>
+					</thead>
+					<tbody id="hi">
+						{% for user in users %}
+							<tr>
+								<td>{{ user.email }}</td>
+								<td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+								<td>{{ user.nom }}</td>
+								<td>{{ user.prenom }}</td>
+								<td>{{ user.departement }}</td>
+								<td>{{ user.age }}</td>
+								<td>{{ user.poste }}</td>
+								<td>
+									<a href="{{ path('user_show', {'id': user.id}) }}">show</a>
+									<a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+								</td>
+							</tr>
+						{% else %}
+							<tr>
+								<td colspan="15">no records found</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

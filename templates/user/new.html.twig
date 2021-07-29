@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+
+	<div class="col-md-6 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Create Admin</h4>
+				<p class="card-description">
+					Informations Admin
+				</p>
+
+				{{ form_start(form) }}
+				<div class="form-group row">
+					<label for="exampleInputUsername2" class="col-sm-3 col-form-label">Nom</label>
+					<div class="col-sm-9">
+						{{ form_widget(form.nom , {'attr': { 'placeholder' : 'Nom'}}
+						) }}
+						{{ form_errors(form.nom) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputUsername2" class="col-sm-3 col-form-label">Prénom</label>
+					<div class="col-sm-9">
+						{{ form_widget(form.prenom , {'attr': { 'placeholder' : 'Prénom'}}
+						) }}
+						{{ form_errors(form.prenom) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputUsername2" class="col-sm-3 col-form-label">CIN</label>
+					<div class="col-sm-9">
+						{{ form_widget(form.cin , {'attr': { 'placeholder' : 'CIN'}}
+						) }}
+						{{ form_errors(form.cin) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputUsername2" class="col-sm-3 col-form-label">Tel</label>
+					<div class="col-sm-9">
+						{{ form_widget(form.tel , {'attr': { 'placeholder' : 'Tel'}}
+						) }}
+						{{ form_errors(form.tel) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputUsername2" class="col-sm-3 col-form-label">Département</label>
+					<div class="col-sm-9">
+						{{ form_widget(form.departement , {'attr': { 'placeholder' : 'Département'}}
+						) }}
+						{{ form_errors(form.departement) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputUsername2" class="col-sm-3 col-form-label">Adresse</label>
+					<div class="col-sm-9">
+						{{ form_widget(form.adresse , {'attr': { 'placeholder' : 'Adresse'}}
+						) }}
+						{{ form_errors(form.adresse) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputUsername2" class="col-sm-3 col-form-label">Age</label>
+					<div class="col-sm-9">
+						{{ form_widget(form.age , {'attr': { 'placeholder' : 'Age'}}
+						) }}
+						{{ form_errors(form.age) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputUsername2" class="col-sm-3 col-form-label">Poste</label>
+					<div class="col-sm-9">
+						{{ form_widget(form.poste , {'attr': { 'placeholder' : 'Poste'}}
+						) }}
+						{{ form_errors(form.poste) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputUsername2" class="col-sm-3 col-form-label">Email</label>
+					<div class="col-sm-9">
+						{{ form_widget(form.email , {'attr': { 'placeholder' : 'Email'}}
+						) }}
+						{{ form_errors(form.email) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputUsername2" class="col-sm-3 col-form-label">Mot de Passe</label>
+					<div class="col-sm-9">
+						{{ form_widget(form.password , {'attr': { 'placeholder' : 'Mot de Passe'}}
+						) }}
+						{{ form_errors(form.password) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputUsername2" class="col-sm-3 col-form-label">Taches</label>
+					<div class="col-sm-9">
+						{{ form_widget(form.taches , {'attr': { 'placeholder' : 'Taches'}}
+						) }}
+						{{ form_errors(form.taches) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-9">
+						{{ form_widget(form.ajouter , {'attr': {'class':'btn btn-gradient-primary mr-2', 'placeholder' : 'Ajouter'}}
+						) }}
+					</div>
+				</div>
+				{{ form_end(form) }}
+
+			</div>
+		</div>
+	</div>
+
+
+	<a href="{{ path('user_index') }}">back to list</a>
+{% endblock %}

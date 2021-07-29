@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+	<h1>Tache</h1>
+
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ tache.id }}</td>
+			</tr>
+			<tr>
+				<th>Nom</th>
+				<td>{{ tache.nom }}</td>
+			</tr>
+			<tr>
+				<th>Etat</th>
+				<td>{{ tache.etat }}</td>
+			</tr>
+			<tr>
+				<th>Departement</th>
+				<td>{{ tache.departement }}</td>
+			</tr>
+			<tr>
+				<th>Document</th>
+				<td>{{ tache.document }}</td>
+			</tr>
+			<tr>
+				<th>Description</th>
+				<td>{{ tache.description }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<a href="{{ path('tache_index') }}">back to list</a>
+
+	<a href="{{ path('tache_edit', {'id': tache.id}) }}">edit</a>
+
+	{{ include('tache/_delete_form.html.twig') }}
+{% endblock %}

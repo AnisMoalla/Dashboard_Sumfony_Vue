@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+	<div class="col-md-6 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Edit Employe</h4>
+				<p class="card-description">
+					Informations Employe
+				</p>
+
+				{{ form_start(form) }}
+				<div class="form-group row">
+					<label for="exampleInputUsername2" class="col-sm-3 col-form-label">Nom</label>
+					<div class="col-sm-9">
+						{{ form_widget(form.nom , {'attr': {'class':'form-control', 'placeholder' : 'Nom'}}
+						) }}
+						{{ form_errors(form.nom) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputEmail2" class="col-sm-3 col-form-label">Prénom</label>
+					<div class="col-sm-9">
+						{{ form_widget(form.prenom , {'attr': {'class':'form-control', 'placeholder' : 'Prénom'}}
+						) }}
+						{{ form_errors(form.prenom) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputMobile" class="col-sm-3 col-form-label">Cin</label>
+					<div class="col-sm-9">
+						{{ form_widget(form.cin , {'attr': {'class':'form-control', 'placeholder' : 'Cin'}}
+						) }}
+						{{ form_errors(form.cin) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputPassword2" class="col-sm-3 col-form-label">Tel</label>
+					<div class="col-sm-9">
+						{{ form_widget(form.tel , {'attr': {'class':'form-control', 'placeholder' : 'Tel'}}
+						) }}
+						{{ form_errors(form.tel) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputPassword2" class="col-sm-3 col-form-label">Département</label>
+					<div class="col-sm-9">
+						{{ form_widget(form.departement , {'attr': {'class':'form-control', 'placeholder' : 'Département'}}
+						) }}
+						{{ form_errors(form.departement) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputPassword2" class="col-sm-3 col-form-label">Adresse</label>
+					<div class="col-sm-9">
+						{{ form_widget(form.adresse , {'attr': {'class':'form-control', 'placeholder' : 'Adresse'}}
+						) }}
+						{{ form_errors(form.adresse) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputPassword2" class="col-sm-3 col-form-label">Age</label>
+					<div class="col-sm-9">
+						{{ form_widget(form.age , {'attr': {'class':'form-control', 'placeholder' : 'Age'}}
+						) }}
+						{{ form_errors(form.age) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputPassword2" class="col-sm-3 col-form-label">But</label>
+					<div class="col-sm-9">
+						{{ form_widget(form.but , {'attr': {'class':'form-control', 'placeholder' : 'But'}}
+						) }}
+						{{ form_errors(form.but) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputPassword2" class="col-sm-3 col-form-label">Salaire</label>
+					<div class="col-sm-9">
+						{{ form_widget(form.salaire , {'attr': {'class':'form-control', 'placeholder' : 'Salaire'}}
+						) }}
+						{{ form_errors(form.salaire) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputPassword2" class="col-sm-3 col-form-label">Email</label>
+					<div class="col-sm-9">
+						{{ form_widget(form.email , {'attr': {'class':'form-control', 'placeholder' : 'Email'}}
+						) }}
+						{{ form_errors(form.email) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputPassword2" class="col-sm-3 col-form-label">Password</label>
+					<div class="col-sm-9">
+						{{ form_widget(form.password , {'attr': {'class':'form-control', 'placeholder' : 'Password'}}
+						) }}
+						{{ form_errors(form.password) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputPassword2" class="col-sm-3 col-form-label">Taches</label>
+					<div class="col-sm-9">
+						{{ form_widget(form.taches , {'attr': {'class':'form-control', 'placeholder' : 'Taches'}}
+						) }}
+						{{ form_errors(form.taches) }}
+					</div>
+				</div>
+				<div>
+					{{ form_widget(form.modifier , {'attr': {'class':'btn btn-gradient-primary mr-2', 'placeholder' : 'Modifier'}}
+					) }}
+				</div>
+				{{ form_end(form) }}
+
+			</div>
+		</div>
+	</div>
+
+	<a href="{{ path('user_index') }}">back to list</a>
+
+	{{ include('user/_delete_form.html.twig') }}
+{% endblock %}
