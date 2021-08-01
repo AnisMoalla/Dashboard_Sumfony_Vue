@@ -48,11 +48,16 @@
 							<li class="nav-item nav-profile dropdown">
 								<a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
 									<div class="nav-profile-img">
-										<img src="{{asset('back/assets/images/faces/face2.jpg')}}" alt="image">
+										<img src="{{asset('uploads/images/' ~   app.user.image )}}" alt="image">
 										<span class="availability-status online"></span>
 									</div>
 									<div class="nav-profile-text">
-										<p class="mb-1 text-black">Fatma Bahloul</p>
+										{% if is_granted('ROLE_ADMIN') %}
+										<p class="mb-1 text-black">ADMIN</p>
+										{% endif %}
+										{% if is_granted('ROLE_EMPLOYE') %}
+										<p class="mb-1 text-black">EMPLOYE (pas d'acces comptes)</p>
+										{% endif %}
 									</div>
 								</a>
 								<div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
@@ -197,12 +202,12 @@
 							<li class="nav-item nav-profile">
 								<a href="#" class="nav-link">
 									<div class="nav-profile-image">
-										<img src="{{asset('back/assets/images/faces/face2.jpg')}}" alt="profile">
+										<img src="{{asset('uploads/images/' ~   app.user.image )}}" alt="image">
 										<span class="login-status online"></span>
 										<!--change to offline or busy as needed-->
 									</div>
 									<div class="nav-profile-text d-flex flex-column">
-										<span class="font-weight-bold mb-2">Fatma Bahloul</span>
+										<span class="font-weight-bold mb-2">{{ app.user.prenom }} {{ app.user.nom }} </span>
 										<span class="text-secondary text-small">Project Manager</span>
 									</div>
 									<i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
@@ -220,6 +225,8 @@
 									<i class="menu-arrow"></i>
 									<i class="mdi mdi-contacts menu-icon"></i>
 								</a>
+								{% if is_granted('ROLE_ADMIN') %}
+
 								<div class="collapse" id="ui-basic">
 									<ul class="nav flex-column sub-menu">
 										<li class="nav-item">
@@ -230,6 +237,7 @@
 										</li>
 									</ul>
 								</div>
+								{% endif %}
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="{{ url('tache_index') }}">
@@ -237,13 +245,14 @@
 									<i class="mdi mdi-table-large menu-icon"></i>
 								</a>
 							</li>
+							{% if is_granted('ROLE_ADMIN') %}
 							<li class="nav-item">
 								<a class="nav-link" href="{{ url('statsadmin') }}">
 									<span class="menu-title">Statistiques</span>
 									<i class="mdi mdi-chart-bar menu-icon"></i>
 								</a>
 							</li>
-
+{% endif %}
 							<li class="nav-item sidebar-actions">
 								<span class="nav-link">
 									<div class="border-bottom"></div>

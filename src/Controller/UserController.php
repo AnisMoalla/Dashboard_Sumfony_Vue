@@ -14,9 +14,13 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Form\Extension\Core\Type\FileType ;
+use Symfony\Component\Validator\Constraints\Image;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/user")
+ * @IsGranted("ROLE_ADMIN")
  */
 class UserController extends AbstractController
 {
@@ -195,11 +199,34 @@ class UserController extends AbstractController
         $form = $this->createForm(UserType::class, $user);
         $form->add('poste' , null , array(
             'constraints' => array(
-                new NotBlank(),)));
+                new NotBlank(),)))
+            ->add('image', FileType::class, [
+                'label' => 'Profile picture',
+
+                'mapped' => false,
+
+                'required' => false,
+
+                'constraints' => [
+                    new Image(),
+                ]]);
         $form->add('ajouter',SubmitType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form->get('image')->getData();
+            if ($image)
+            {
+                $newFilename = uniqid().'.'.$image->guessExtension();
+                try {
+                    $image->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+                $user->setImage($newFilename);
+            }
             $hash = $userPasswordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash) ;
             $entityManager = $this->getDoctrine()->getManager();
@@ -283,7 +310,17 @@ class UserController extends AbstractController
         $form = $this->createForm(UserType::class, $user);
         $form->add('but' , null , array(
             'constraints' => array(
-                new NotBlank(),)));
+                new NotBlank(),)))
+            ->add('image', FileType::class, [
+                'label' => 'Profile picture',
+
+                'mapped' => false,
+
+                'required' => false,
+
+                'constraints' => [
+                    new Image(),
+                ]]);
         $form->add('salaire' , null , array(
             'constraints' => array(
                 new NotBlank(),)));
@@ -291,6 +328,19 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form->get('image')->getData();
+            if ($image)
+            {
+                $newFilename = uniqid().'.'.$image->guessExtension();
+                try {
+                    $image->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+                $user->setImage($newFilename);
+            }
             $hash = $userPasswordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash) ;
             $entityManager = $this->getDoctrine()->getManager();

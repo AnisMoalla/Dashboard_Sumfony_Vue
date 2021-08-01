@@ -43,45 +43,45 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="Nom necessaire")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="Prenom necessaire")
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="string", length=8)
-     * @Assert\NotBlank
-     * @Assert\Length(min="8")
+     * @Assert\NotBlank(message="Cin necessaire")
+     * @Assert\Length(min="8" ,minMessage="Longeur 8")
      */
     private $cin;
 
     /**
      * @ORM\Column(type="string", length=8)
-     * @Assert\NotBlank
-     * @Assert\Length(min="8")
+     * @Assert\NotBlank(message="Tel necessaire")
+     * @Assert\Length(min="8" , minMessage="Longeur 8")
      */
     private $tel;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="Departement necessaire")
      */
     private $departement;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="Adresse necessaire")
      */
     private $adresse;
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="Age necessaire")
      */
     private $age;
 
@@ -109,6 +109,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
 
     public function __construct()
     {
@@ -361,6 +366,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

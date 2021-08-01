@@ -13,6 +13,8 @@ use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
+use Symfony\Component\Form\Extension\Core\Type\FileType ;
+use Symfony\Component\Validator\Constraints\Image;
 
 
 class RegistrationController extends AbstractController
@@ -31,9 +33,32 @@ class RegistrationController extends AbstractController
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
+        $form->add('image', FileType::class, [
+            'label' => 'Profile picture',
+
+            'mapped' => false,
+
+            'required' => false,
+
+            'constraints' => [
+                new Image(),
+            ]]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form->get('image')->getData();
+            if ($image)
+            {
+                $newFilename = uniqid().'.'.$image->guessExtension();
+                try {
+                    $image->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+                $user->setImage($newFilename);
+            }
             // encode the plain password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
@@ -76,7 +101,7 @@ class RegistrationController extends AbstractController
 
             $mailer->send($message);*/
 
-            return $this->redirectToRoute('index');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('registration/register.html.twig', [
@@ -103,6 +128,6 @@ class RegistrationController extends AbstractController
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
         $this->addFlash('success', 'Your email address has been verified.');
 
-        return $this->redirectToRoute('app_register');
+        return $this->redirectToRoute('app_login');
     }
 }

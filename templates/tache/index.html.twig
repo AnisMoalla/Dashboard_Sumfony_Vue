@@ -6,10 +6,23 @@
 		<div class="card">
 			<div class="card-body">
 				<h4 class="card-title">Tache Index</h4>
+				<div class="row">
 				<p class="card-description">
 					Consulter
 					<code>Taches</code>
 				</p>
+				<div class="form-group">
+					<div class="input-group">
+						<input type="text" class="form-control" id="myInput" placeholder="Rechercher" aria-label="Recipient's username" aria-describedby="basic-addon2">
+						<div class="input-group-append">
+							<button class="btn btn-sm btn-gradient-primary" type="button">Search</button>
+						</div>
+						<button class="btn btn-sm btn-gradient-primary" type="button">
+							<a href="{{ url('adminsListe')}}">PDF</a>
+						</button>
+					</div>
+				</div>
+				</div>
 				<table class="table table-striped">
 					<thead>
 						<tr>
@@ -21,7 +34,7 @@
 							<th>actions</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="hi">
 						{% for tache in taches %}
 							<tr>
 								<td>{{ tache.nom }}</td>
@@ -46,4 +59,16 @@
 	</div>
 
 	<a href="{{ path('tache_new') }}">Create new</a>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$("#myInput").on("keyup", function () {
+				var value = $(this).val().toLowerCase();
+				$("#hi tr").filter(function () {
+					$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+				});
+			});
+		});
+	</script>
 {% endblock %}
